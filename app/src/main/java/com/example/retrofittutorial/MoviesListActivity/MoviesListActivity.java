@@ -6,6 +6,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.retrofittutorial.API.MoviesAPIRequester;
@@ -13,6 +14,7 @@ import com.example.retrofittutorial.Models.BaseResponse;
 import com.example.retrofittutorial.Models.MovieModel;
 import com.example.retrofittutorial.Models.MoviesListData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -42,8 +44,10 @@ public class MoviesListActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<BaseResponse<MoviesListData>> call, Response<BaseResponse<MoviesListData>> response) {
                 BaseResponse<MoviesListData> moviesBaseResponse = response.body();
-                List<MovieModel> movies = moviesBaseResponse.getData().getMovies();
-
+                MovieListAdapter adapter = new MovieListAdapter(getApplicationContext(), moviesBaseResponse.getData().getMovies());
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+                moviesList.setLayoutManager(linearLayoutManager);
+                moviesList.setAdapter(adapter);
             }
 
             @Override

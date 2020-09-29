@@ -1,12 +1,12 @@
 package com.example.retrofittutorial.Models;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class MoviesListData {
     int movie_count;
     int limit;
     int page_number;
-    List<MovieModel> movies;
+    ArrayList<MovieModel> movies;
 
     public int getMovieCount() {
         return movie_count;
@@ -20,7 +20,7 @@ public class MoviesListData {
         return page_number;
     }
 
-    public List<MovieModel> getMovies() {
+    public ArrayList<MovieModel> getMovies() {
         return movies;
     }
 }
