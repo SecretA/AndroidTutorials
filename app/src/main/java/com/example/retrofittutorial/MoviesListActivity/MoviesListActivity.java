@@ -21,10 +21,9 @@ public class MoviesListActivity extends AppCompatActivity {
         binding.moviesList.setLayoutManager(linearLayoutManager);
 
         MoviesListViewModel model = new ViewModelProvider(this).get(MoviesListViewModel.class);
-        model.getMovies().observe(this, moviesData -> {
-            ArrayList<MovieModel> movies = moviesData.getData().getMovies();
-            if (movies != null) {
-                MovieListAdapter adapter = new MovieListAdapter(movies);
+        model.getMovies().observe(this, moviesResponse -> {
+            if (moviesResponse != null && moviesResponse.getData() != null && moviesResponse.getData().getMovies() != null) {
+                MovieListAdapter adapter = new MovieListAdapter(moviesResponse.getData().getMovies());
                 binding.moviesList.setAdapter(adapter);
             }
         });
