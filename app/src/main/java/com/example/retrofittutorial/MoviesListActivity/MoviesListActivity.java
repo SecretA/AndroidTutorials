@@ -13,6 +13,7 @@ import com.example.retrofittutorial.API.MoviesAPIRequester;
 import com.example.retrofittutorial.Models.BaseResponse;
 import com.example.retrofittutorial.Models.MovieModel;
 import com.example.retrofittutorial.Models.MoviesListData;
+import com.example.retrofittutorial.MoviesListActivity.databinding.ActivityMoviesListBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,13 +25,11 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MoviesListActivity extends AppCompatActivity {
-    RecyclerView moviesList;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movies_list);
-
-        moviesList = (RecyclerView) findViewById(R.id.movies_list);
+        final ActivityMoviesListBinding binding = ActivityMoviesListBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl("https://yts.mx")
@@ -44,10 +43,10 @@ public class MoviesListActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<BaseResponse<MoviesListData>> call, Response<BaseResponse<MoviesListData>> response) {
                 BaseResponse<MoviesListData> moviesBaseResponse = response.body();
-                MovieListAdapter adapter = new MovieListAdapter(getApplicationContext(), moviesBaseResponse.getData().getMovies());
+                MovieListAdapter adapter = new MovieListAdapter(moviesBaseResponse.getData().getMovies());
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-                moviesList.setLayoutManager(linearLayoutManager);
-                moviesList.setAdapter(adapter);
+                binding.moviesList.setLayoutManager(linearLayoutManager);
+                binding.moviesList.setAdapter(adapter);
             }
 
             @Override
