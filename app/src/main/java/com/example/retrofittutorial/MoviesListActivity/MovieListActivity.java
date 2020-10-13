@@ -21,13 +21,18 @@ public class MovieListActivity extends AppCompatActivity implements MoviesContra
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+
         binding = ActivityMoviesListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         binding.moviesList.setLayoutManager(linearLayoutManager);
+
         binding.swiperefresh.setOnRefreshListener(this);
         binding.swiperefresh.setColorSchemeColors(Color.BLUE);
+
         presenter.onCreate(this);
+        presenter.getMovies(0);
     }
 
     @Override

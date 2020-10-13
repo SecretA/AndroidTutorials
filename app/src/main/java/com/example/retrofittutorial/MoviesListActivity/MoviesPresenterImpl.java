@@ -12,7 +12,6 @@ public class MoviesPresenterImpl implements MoviesContract.Presenter {
     @Override
     public void onCreate(MoviesContract.View view) {
         this.view = view;
-        getMovies(0);
     }
 
     @Override
