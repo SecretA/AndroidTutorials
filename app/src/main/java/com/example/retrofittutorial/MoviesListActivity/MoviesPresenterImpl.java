@@ -22,8 +22,7 @@ public class MoviesPresenterImpl implements MoviesContract.Presenter {
         view.showLoader();
         disposable.add(
                 repo.getMovies(page).subscribe(
-                        successResponse ->
-                        {
+                        successResponse -> {
                             view.stopLoader();
                             if (successResponse != null) {
                                 view.updateMoviesList(successResponse.getData().getMovies());
